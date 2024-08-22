@@ -1,0 +1,66 @@
+window
+  x: 0
+  y: 0
+  width: 987
+  height: 0
+  font
+    family: {sans}
+    size: 8.0
+
+menu
+  font
+    family: {sans}
+    size: 8.0
+
+browser
+  width: 260
+  font
+    family: {sans}
+    size: 8.0
+  color
+    background: 0x333939
+    standard: 0xf0f0f0
+    modified: 0xf07878
+    desynced: 0x7878f0
+    readonly: 0x78d278
+
+editor
+  font
+    family: {mono}
+    size: 9.0
+  color
+    background: 0x333939
+    standard: 0xf0f0f0
+  scheme: Oblivion
+
+find
+  font
+    family: {sans}
+    size: 8.0
+  color
+    background: 0x333939
+    standard: 0xf0f0f0
+
+goto
+  font
+    family: {sans}
+    size: 8.0
+  color
+    background: 0x333939
+    standard: 0xf0f0f0
+
+name
+  font
+    family: {sans}
+    size: 8.0
+  color
+    background: 0x333939
+    standard: 0xf0f0f0
+
+save
+  font
+    family: {sans}
+    size: 8.0
+  color
+    background: 0x333939
+    standard: 0xf0f0f0

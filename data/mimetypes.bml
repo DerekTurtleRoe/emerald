@@ -1,0 +1,27 @@
+file match=Makefile type=Makefile
+file match=BSDmakefile type=Makefile
+file match=GNUmakefile type=Makefile
+
+file match=*.cpp type=C++
+file match=*.hpp type=C++
+
+file match=*.c type=C
+file match=*.h type=C
+
+file match=*.asm type=Text
+file match=*.s type=Text
+
+file match=*.bml type=Text
+file match=*.cml type=Text
+file match=*.dml type=Text
+
+file match=*.html type=Text
+file match=*.htm type=Text
+file match=*.css type=Text
+
+file match=*.txt type=Text
+file match=*.ini type=Text
+file match=*.cfg type=Text
+file match=*.conf type=Text
+file match=*.rc type=Text
+file match=*.Manifest type=Text

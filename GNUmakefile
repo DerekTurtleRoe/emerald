@@ -1,4 +1,4 @@
-name := amethyst
+name := emerald
 build := stable
 flags += -I.
 

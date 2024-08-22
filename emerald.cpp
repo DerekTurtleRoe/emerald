@@ -4,7 +4,7 @@ using namespace nall;
 #include <hiro/hiro.hpp>
 using namespace hiro;
 
-#include "amethyst.hpp"
+#include "emerald.hpp"
 namespace Instances { Instance<Program> program; }
 namespace Instances { Instance<SaveDialog> saveDialog; }
 Program& program = Instances::program();
@@ -14,7 +14,7 @@ Markup::Node mimetypes;
 
 auto about() -> void {
   AboutDialog()
-  .setName("amethyst")
+  .setName("emerald")
   .setDescription("A lightweight source code editor with tree-view navigation")
   .setVersion("4")
   .setLicense("ISC", "https://opensource.org/licenses/ISC")
@@ -24,8 +24,8 @@ auto about() -> void {
 
 auto locate(string location) -> string {
   if(inode::exists({Path::program(), location})) return {Path::program(), location};
-  directory::create({Path::userSettings(), "amethyst/"});
-  return {Path::userSettings(), "amethyst/", location};
+  directory::create({Path::userSettings(), "emerald/"});
+  return {Path::userSettings(), "emerald/", location};
 }
 
 auto getFont(string path) -> Font {
@@ -220,10 +220,10 @@ Program::Program() {
     .create()
     ) {
       if(inode::exists({location, name})) {
-        return (void)MessageDialog().setTitle("amethyst").setAlignment(program).setText("Chosen name already exists.").error();
+        return (void)MessageDialog().setTitle("emerald").setAlignment(program).setText("Chosen name already exists.").error();
       }
       if(!directory::create({location, name})) {
-        return (void)MessageDialog().setTitle("amethyst").setAlignment(program).setText("Failed to create folder.").error();
+        return (void)MessageDialog().setTitle("emerald").setAlignment(program).setText("Failed to create folder.").error();
       }
       if(auto parent = treeView.selected()) {
         append(parent, {location, name, "/"}).setSelected();
@@ -246,10 +246,10 @@ Program::Program() {
     .create()
     ) {
       if(inode::exists({location, string{name}.trimRight("/", 1L)})) {
-        return (void)MessageDialog().setTitle("amethyst").setAlignment(program).setText("Chosen name already exists.").error();
+        return (void)MessageDialog().setTitle("emerald").setAlignment(program).setText("Chosen name already exists.").error();
       }
       if(!file::create({location, name})) {
-        return (void)MessageDialog().setTitle("amethyst").setAlignment(program).setText("Failed to create file.").error();
+        return (void)MessageDialog().setTitle("emerald").setAlignment(program).setText("Failed to create file.").error();
       }
       if(auto parent = treeView.selected()) {
         append(parent, {location, name}).setSelected();
@@ -273,11 +273,11 @@ Program::Program() {
         if(newName == oldName) return;
         auto location = Location::dir(document->location);
         if(inode::exists({location, newName})) {
-          return (void)MessageDialog().setTitle("amethyst").setAlignment(program).setText("Chosen name already exists.").error();
+          return (void)MessageDialog().setTitle("emerald").setAlignment(program).setText("Chosen name already exists.").error();
         }
         if(!inode::rename({location, oldName}, {location, newName})) {
           string type = document->type == "folder" ? "folder." : "file.";
-          return (void)MessageDialog().setTitle("amethyst").setAlignment(program).setText({"Failed to rename ", type}).error();
+          return (void)MessageDialog().setTitle("emerald").setAlignment(program).setText({"Failed to rename ", type}).error();
         }
         if(document->type == "folder") newName.append("/");
         document->rename(newName);
@@ -287,7 +287,7 @@ Program::Program() {
 
   removeDocumentAction.setIcon(Icon::Edit::Delete).onActivate([&] {
     if(auto document = documentActive()) {
-      if(MessageDialog().setTitle("amethyst").setAlignment(program).setText({
+      if(MessageDialog().setTitle("emerald").setAlignment(program).setText({
         "Are you sure you want to permanently delete this ",
         document->type == "folder" ? "folder, and all of its contents?\n\n" : "file?\n\n",
         document->title()
@@ -295,11 +295,11 @@ Program::Program() {
       if(document->type == "folder") {
         if(!document->treeViewItem.expanded()) treeView.doActivate();  //show the user what will be deleted
         if(!directory::remove(document->location)) {
-          return (void)MessageDialog().setTitle("amethyst").setAlignment(program).setText("Failed to remove folder.").error();
+          return (void)MessageDialog().setTitle("emerald").setAlignment(program).setText("Failed to remove folder.").error();
         }
       } else {
         if(!file::remove(document->location)) {
-          return (void)MessageDialog().setTitle("amethyst").setAlignment(program).setText("Failed to remove file.").error();
+          return (void)MessageDialog().setTitle("emerald").setAlignment(program).setText("Failed to remove file.").error();
         }
       }
       document->treeViewItem.remove();
@@ -523,14 +523,14 @@ auto Program::documentSave(Window parent, shared_pointer<Document> document) -> 
   } else {
     auto timestamp = file::timestamp(document->location, file::time::modify);
     if(timestamp > document->timestamp) {
-      if(MessageDialog().setAlignment(parent).setTitle("amethyst").setText({
+      if(MessageDialog().setAlignment(parent).setTitle("emerald").setText({
         "File modified externally since opening. Save anyway?\n\n",
         document->title()
       }).warning({"Yes", "No"}) == "No") return;
     }
   }
   if(!file::write(document->location, document->sourceEdit.text())) {
-    MessageDialog().setAlignment(parent).setTitle("amethyst").setText({
+    MessageDialog().setAlignment(parent).setTitle("emerald").setText({
       "Failed to save file. Perhaps file permissions changed after loading.\n\n",
       document->title()
     }).error();
@@ -645,7 +645,7 @@ SaveDialog::SaveDialog() {
   saveQuitButton.setText("Save & Quit").setFont(getFont("window/font")).onActivate([&] { saveSelected(); close(true); });
   cancelButton.setText("Cancel").setFont(getFont("window/font")).onActivate([&] { close(false); });
   onClose([&] { close(false); });
-  setTitle("amethyst");
+  setTitle("emerald");
   setDismissable();
   setSize({640, 400});
 }
@@ -690,13 +690,13 @@ auto SaveDialog::close(bool quit) -> void {
 #include <nall/main.hpp>
 auto nall::main(Arguments arguments) -> void {
   settings = BML::unserialize(file::read(locate("settings.bml")));
-  Application::setName("amethyst");
+  Application::setName("emerald");
 
   Instances::program.construct();
   Instances::saveDialog.construct();
 
   if(!file::exists(locate("settings.bml")) || !file::exists(locate("mimetypes.bml"))) {
-    return (void)MessageDialog().setTitle("amethyst").setText({
+    return (void)MessageDialog().setTitle("emerald").setText({
       "Missing configuration files.\n"
       "Please run 'make install' before using this software."
     });

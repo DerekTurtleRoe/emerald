@@ -4,18 +4,18 @@ window
   width: 987
   height: 0
   font
-    family: {sans}
+    family: Courier New
     size: 8.0
 
 menu
   font
-    family: {sans}
+    family: Courier New
     size: 8.0
 
 browser
   width: 260
   font
-    family: {sans}
+    family: Courier New
     size: 8.0
   color
     background: 0x333939
@@ -26,7 +26,7 @@ browser
 
 editor
   font
-    family: {mono}
+    family: Courier New
     size: 9.0
   color
     background: 0x333939
@@ -35,7 +35,7 @@ editor
 
 find
   font
-    family: {sans}
+    family: Courier New
     size: 8.0
   color
     background: 0x333939
@@ -43,7 +43,7 @@ find
 
 goto
   font
-    family: {sans}
+    family: Courier New
     size: 8.0
   color
     background: 0x333939
@@ -51,7 +51,7 @@ goto
 
 name
   font
-    family: {sans}
+    family: Courier New
     size: 8.0
   color
     background: 0x333939
@@ -59,7 +59,7 @@ name
 
 save
   font
-    family: {sans}
+    family: Courier New
     size: 8.0
   color
     background: 0x333939
